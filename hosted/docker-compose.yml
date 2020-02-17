@@ -1,0 +1,41 @@
+version: '3.5'
+
+services:
+    db:
+        image: postgres
+        volumes:
+            - db_data:/var/lib/postgresql/data
+            - ./db/init:/docker-entrypoint-initdb.d
+        restart: unless-stopped
+        environment:
+            POSTGRES_PASSWORD: temppassword
+            POSTGRES_USER: dbadmin
+            POSTGRES_DB: org
+        ports:
+            - "3410:5432"
+
+    webservice:
+        depends_on: 
+            - db
+        build:
+            context: ./webservice
+            dockerfile: dockerfile
+        volumes:
+            - ./webservice:/user/src/app
+        restart: unless-stopped
+
+    web:
+        depends_on:
+            - webservice
+        ports:
+            - "3400:3000"
+        build:
+            context: ./web
+            dockerfile: dockerfile
+        volumes:
+            - ./web:/usr/src/app
+        restart: unless-stopped
+        
+
+volumes:
+    db_data: {}
