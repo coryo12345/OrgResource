@@ -1,14 +1,29 @@
 CREATE SCHEMA orgdev;
 
-CREATE GROUP web;
+CREATE TABLE IF NOT EXISTS orgdev.entity (
+	id SERIAL PRIMARY KEY,
+	domain VARCHAR UNIQUE,
+	display_name VARCHAR,
+	username VARCHAR,
+	password VARCHAR
+);
 
-CREATE USER webservice WITH PASSWORD 'tempwebpassword' IN GROUP web;
-CREATE USER appservice WITH PASSWORD 'tempapppassword' IN GROUP web;
+CREATE TABLE IF NOT EXISTS orgdev.login_by_entity (
+    domain VARCHAR REFERENCES orgdev.entity(domain),
+    username VARCHAR,
+    password VARCHAR,
+    PRIMARY KEY (domain, username)
+);
 
-REVOKE CONNECT ON DATABASE nova FROM PUBLIC;
-GRANT CONNECT ON DATABASE org TO web;
+CREATE TABLE IF NOT EXISTS orgdev.pages_by_entity (
+    domain VARCHAR REFERENCES orgdev.entity(domain),
+    id INTEGER,
+    display_name VARCHAR,
+    PRIMARY KEY (domain, id)
+);
 
-GRANT USAGE ON SCHEMA orgdev TO web;
-
-GRANT SELECT                         ON ALL TABLES IN SCHEMA orgdev TO web;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA orgdev TO webservice;
+CREATE TABLE IF NOT EXISTS orgdev.resources_by_entity_page (
+    domain VARCHAR,
+    page_id INTEGER,
+    content VARCHAR
+);

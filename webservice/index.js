@@ -5,6 +5,7 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var indexRouter = require('./routes');
+const uuidv1 = require('uuid/v1');
 // get env variables
 require('dotenv').config()
 
@@ -12,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(session({
     genid: function(req) {
-        return genuuid() // use UUIDs for session IDs
+        return uuidv1() // use UUIDs for session IDs
     },
     secret: 'tempsecret',
     resave: false,
@@ -32,7 +33,4 @@ app.use(function(req, res, next) {
 
 app.use('/api/web', indexRouter);
 
-var port = 80
-if (process.env.PORT !== null)
-    var port = process.env.PORT
-app.listen(port, () => console.log(`Webservice listening on port ${port}!`))
+app.listen(process.env.PORT, () => console.log(`Webservice listening on port ${process.env.PORT}!`))

@@ -9,18 +9,35 @@ const { orgDao } = require('../models/orgDao');
  *  body: {Object}
  *  {entity, username, password}
  * 
- *  if failed return {loggedin: false}
+ *  if failed return {loggedIn: false}
  */
 exports.login = function (req, res) {
     let entity = req.body.entity;
     let username = req.body.username;
     let password = req.body.password;
     dao = new orgDao(entity);
-    if (dao.authenticate(username, password)) {
-        req.session.entity = entity;
-        res.json({ loggedin: true, entity: entity });
+    dao.authenticate(username, password, (val) => {
+        if (val === true) {
+            req.session.entity = entity;
+            req.session.loggedIn = true;
+            res.json({ loggedIn: true, entity: entity });
+        }
+        else {
+            res.json({ loggedIn: false });
+        }
+    })
+}
+
+/** 
+ *  GET /api/web/auth/login
+ *  
+ *  returns { Object }
+ */
+exports.isLoggedIn = function (req, res) {
+    if (req.session.loggedIn === true && req.session.entity !== null) {
+        res.json({ loggedIn: true, entity: req.session.entity });
     }
     else {
-        res.json({ loggedin: false });
+        res.json({ loggedIn: false });
     }
 }

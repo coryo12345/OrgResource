@@ -7,9 +7,9 @@ WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app
 
-RUN npm install -g react-scripts
+# RUN npm install -g react-scripts
 
-RUN npm install
+# RUN npm install
 
 COPY . /usr/src/app
 

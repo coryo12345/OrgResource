@@ -4,7 +4,7 @@ exports.authenticate = `
 SELECT
         TRUE
 FROM
-        ${process.env.PGSCHEMA}."entity" e
+        orgdev."entity" e
 WHERE
         "domain" = $1
         AND "username" = $2
