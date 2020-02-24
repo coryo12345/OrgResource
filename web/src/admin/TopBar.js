@@ -11,11 +11,11 @@ export class TopBar extends Component {
         return (
             <AppBar position="static">
                 <Toolbar variant="dense">
-                    <IconButton edge="start" color="inherit" aria-label="menu">
+                    <IconButton edge="start" color="inherit" aria-label="menu" onClick={this.props.toggleMenu}>
                         <MenuRounded />
                     </IconButton>
                     <Typography variant="h6" color="inherit">
-                        Photos
+                        {this.props.name}
                     </Typography>
                 </Toolbar>
             </AppBar>

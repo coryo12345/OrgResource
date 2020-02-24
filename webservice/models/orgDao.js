@@ -30,6 +30,13 @@ class orgDao {
             callback(res);
         });
     }
+
+    entityPages(callback) {
+        this.dao.query(sql.entityPages, [this.entity], (err,res) => {
+            if (err) throw err;
+            callback(res);
+        })
+    }
 }
 
 exports.orgDao = orgDao;

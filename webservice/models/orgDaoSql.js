@@ -20,4 +20,18 @@ FROM
         orgdev."entity" e
 WHERE
         "domain" = $1
+;
+`;
+
+exports.entityPages = `
+SELECT
+        pbe.display_name,
+        pbe.id
+FROM
+        orgdev."pages_by_entity" pbe
+WHERE
+        pbe.domain = $1
+ORDER BY
+        pbe.id ASC
+;
 `;
