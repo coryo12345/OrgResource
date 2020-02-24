@@ -15,15 +15,19 @@ class orgDao {
     authenticate(username, password, callback) {
         this.dao.query(sql.authenticate, [this.entity, username, password], (err, res) => {
             if (err) throw err;
-            console.log(res);
             if (res.rowCount > 0){
-                console.log(true);
                 callback(true);
             }
             else{
-                console.log(false);
                 callback(false);
             }
+        });
+    }
+
+    entityInfo(callback) {
+        this.dao.query(sql.entityInfo, [this.entity], (err, res) => {
+            if(err) throw err;
+            callback(res);
         });
     }
 }

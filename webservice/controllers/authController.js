@@ -15,7 +15,7 @@ exports.login = function (req, res) {
     let entity = req.body.entity;
     let username = req.body.username;
     let password = req.body.password;
-    dao = new orgDao(entity);
+    var dao = new orgDao(entity);
     dao.authenticate(username, password, (val) => {
         if (val === true) {
             req.session.entity = entity;

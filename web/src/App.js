@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Home } from './home/Home'
-import { Layout } from './Layout'
+import { Admin } from './admin/Admin'
 import {
     BrowserRouter as Router,
     Switch,
@@ -17,9 +17,7 @@ export class App extends Component {
             <Router style={pageStyle}>
                 <Switch>
                     <Route path="/admin">
-                        <Layout>
-                            <div>Admin Interface</div>
-                        </Layout>
+                        <Admin s={pageStyle}></Admin>
                     </Route>
                     <Route path="/">
                         <Home s={pageStyle}></Home>
