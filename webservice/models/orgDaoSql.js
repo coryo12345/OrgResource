@@ -35,3 +35,14 @@ ORDER BY
         pbe.id ASC
 ;
 `;
+
+exports.pageContent = `
+SELECT
+        rbep.content
+FROM
+        orgdev.resources_by_entity_page rbep
+WHERE
+        rbep.domain = $1
+        AND page_id = $2
+;
+`;

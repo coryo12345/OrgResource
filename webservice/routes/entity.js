@@ -12,4 +12,7 @@ router.get('/info', entityController.info);
 // GET /api/web/entity/pages
 router.get('/pages', entityController.pages);
 
+// GET /api/web/entity/page:id
+router.get('/page/:id', entityController.pageContent);
+
 module.exports = router;

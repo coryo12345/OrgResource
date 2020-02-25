@@ -12,4 +12,7 @@ router.get('/login', authController.isLoggedIn);
 // POST /api/web/auth/login
 router.post('/login', authController.login);
 
+// GET /api/web/auth/logout
+router.get('/logout', authController.logout);
+
 module.exports = router;

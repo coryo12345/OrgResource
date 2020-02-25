@@ -7,7 +7,8 @@ export class Admin extends Component {
     constructor(props) {
         super(props)
         this.toggleMenu = this.toggleMenu.bind(this)
-        this.state = { entity: null, entityDisplayName: null, menuShown: true }
+        this.updatePage = this.updatePage.bind(this)
+        this.state = { entity: null, entityDisplayName: null, menuShown: true, pageContent: null }
     }
 
     componentDidMount() {
@@ -30,15 +31,21 @@ export class Admin extends Component {
         this.setState({ menuShown: !this.state.menuShown })
     }
 
+    updatePage(pageId) {
+        console.log(pageId)
+        this.setState({ pageContent: pageId })
+    }
+
     render() {
-        let innerComponent = <Page page="page1" />
+        console.log(this.state.pageContent);
+        let innerComponent = <Page page={this.state.pageContent} />
         let gridShow = (this.state.menuShown === true) ? { gridTemplateColumns: '260px 1fr' } : { gridTemplateColumns: '0 1fr' }
         let sidebarShow = (this.state.menuShown === true) ? { display: 'block' } : { display: 'none' }
         return (
             <div>
                 <TopBar name={this.state.entityDisplayName} toggleMenu={this.toggleMenu} />
                 <div style={Object.assign({}, gridStyle, gridShow)}>
-                    <SideBar style={sidebarShow} />
+                    <SideBar style={sidebarShow} updatePage={this.updatePage}/>
                     {innerComponent}
                 </div>
             </div>

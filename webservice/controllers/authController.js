@@ -41,3 +41,15 @@ exports.isLoggedIn = function (req, res) {
         res.json({ loggedIn: false });
     }
 }
+
+/**
+ *  GET /api/web/auth/logout
+ * 
+ *  returns none
+ */
+exports.logout = function (req, res) {
+    req.session.loggedIn = false;
+    req.session.entity = null;
+    res.stats(200);
+    res.send();
+}

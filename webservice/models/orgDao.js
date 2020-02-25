@@ -37,6 +37,14 @@ class orgDao {
             callback(res);
         })
     }
+
+    pageContent(id, callback) {
+        console.log(id);
+        this.dao.query(sql.pageContent, [this.entity, id], (err, res) => {
+            if(err) throw err;
+            callback(res);
+        })
+    }
 }
 
 exports.orgDao = orgDao;

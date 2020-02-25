@@ -55,3 +55,28 @@ exports.pages = function (req, res) {
         res.json(result);
     });
 }
+
+// GET /api/web/entity/page:id
+exports.pageContent = function (req, res) {
+    if (req.session.loggedIn !== true || req.session.entity === null) {
+        res.status(403);
+        res.send();
+        return;
+    }
+    let entity = req.session.entity;
+    let id = req.params.id;
+    console.log(id);
+    var dao = new orgDao(entity);
+    dao.pageContent(id, (val) => {
+        console.log(val);
+        try {
+            var result = val.rows;
+        }
+        catch (err) {
+            res.status(500);
+            res.send();
+            return;
+        }
+        res.json(result);
+    });
+}

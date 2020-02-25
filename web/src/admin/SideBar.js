@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button, Box } from '@material-ui/core'
 
 export class SideBar extends Component {
     constructor(props) {
@@ -24,8 +25,8 @@ export class SideBar extends Component {
     render() {
         return (
             <div style={Object.assign({}, outerStyle, this.props.style)}>
-                {this.state.pages && this.state.pages.map((val, key) => {
-                    return <p key={val.id}>{val.display_name}</p>
+                {this.state.pages && this.state.pages.map((val, i) => {
+                    return <Box key={val.id}><Button color="primary" onClick={() => { console.log(val.id); this.props.updatePage(val.id) }}>{val.display_name}</Button></Box>
                 })}
             </div>
         )
