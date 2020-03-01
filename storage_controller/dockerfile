@@ -1,0 +1,6 @@
+FROM python:latest
+
+# pip install --upgrade google-cloud-storage
+# pip install flask
+
+RUN export GOOGLE_APPLICATION_CREDENTIALS=""

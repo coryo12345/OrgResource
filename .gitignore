@@ -19,3 +19,8 @@ doc/api/
 *.js.deps
 *.js.map
 *node_modules/
+
+storage_controller/modules/*
+
+# Don't commit gcp keys
+.gcp/*.json
