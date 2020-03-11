@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Box } from '@material-ui/core'
+import { Uploader } from './Uploader'
 
 export class Page extends Component {
     constructor(props) {
@@ -41,6 +42,7 @@ export class Page extends Component {
                 {this.state.pageContent && this.state.pageContent.map((val, i) => {
                     return <Box key={i}>{val.content}</Box>
                 })}
+                <Uploader />
             </Box>
         )
     }

@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Input, Box } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
-// import {
-//     BrowserRouter as Router,
-//     Switch,
-//     Route,
-//     Link
-// } from "react-router-dom"
 
 export class Login extends Component {
     constructor(props) {
