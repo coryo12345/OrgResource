@@ -9,6 +9,8 @@ COPY package.json /usr/src/app
 
 # RUN npm install
 
+ENV GOOGLE_APPLICATION_CREDENTIALS="/.gcp/storage.json"
+
 COPY . /usr/src/app
 
 CMD [ "npm", "start" ]

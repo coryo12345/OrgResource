@@ -22,7 +22,7 @@ services:
             dockerfile: dockerfile
         volumes:
             - ./webservice:/user/src/app/
-            # - /usr/src/app/node_modules
+            - ./.gcp:/.gcp/
         restart: unless-stopped
 
     web:
@@ -35,7 +35,6 @@ services:
             dockerfile: dockerfile
         volumes:
             - ./web:/usr/src/app
-            # - /usr/src/app/node_modules
         restart: unless-stopped
         
 
