@@ -2,48 +2,27 @@
 *   DAO for org DB
 */
 const { Pool } = require('pg');
-const sql = require('./orgDaoSql');
 
 class orgDao {
-    constructor(entity) {
-        this.entity = entity;
+    constructor() {
         this.dao = new Pool();
         this.dao.on('error', (err, client) => { console.error('Unexpected error on idle client', err) });
         this.schema = process.env.PGSCHEMA;
     }
 
-    authenticate(username, password, callback) {
-        this.dao.query(sql.authenticate, [this.entity, username, password], (err, res) => {
-            if (err) throw err;
-            if (res.rowCount > 0){
-                callback(true);
-            }
-            else{
-                callback(false);
-            }
-        });
-    }
-
-    entityInfo(callback) {
-        this.dao.query(sql.entityInfo, [this.entity], (err, res) => {
-            if(err) throw err;
-            callback(res);
-        });
-    }
-
-    entityPages(callback) {
-        this.dao.query(sql.entityPages, [this.entity], (err,res) => {
+    /**
+     * genericQueryExecute
+     * function for generic sql calls to org database
+     * @param query string of query to execute
+     * @param params array of params that fit in query
+     * @param callback the callback function to handle responses
+     * @returns none -> on success will send results object to callback
+     */
+    genericQueryExecute(query, params, callback) {
+        this.dao.query(query, params, (err, res) => {
             if (err) throw err;
             callback(res);
-        })
-    }
-
-    pageContent(id, callback) {
-        console.log(id);
-        this.dao.query(sql.pageContent, [this.entity, id], (err, res) => {
-            if(err) throw err;
-            callback(res);
-        })
+        });
     }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Input, Box } from '@material-ui/core'
+import { Input } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 
 export class Login extends Component {
@@ -61,11 +61,11 @@ export class Login extends Component {
                 {failed}
                 {error}
                 <form style={formStyle} onSubmit={this.login}>
-                    <Input style={loginMargin} type="text" color="primary" onChange={this.domainChange} value={this.state.domainText} placeholder="Domain"></Input>
-                    <Input style={loginMargin} type="text" color="primary" onChange={this.userChange} value={this.state.userText} placeholder="Username"></Input>
-                    <Input style={loginMargin} type="password" color="primary" onChange={this.passChange} value={this.state.passText} placeholder="Password"></Input>
+                    <Input style={loginMargin} type="text" color="primary" onChange={this.domainChange} value={this.state.domainText} placeholder="Domain" />
+                    <Input style={loginMargin} type="text" color="primary" onChange={this.userChange} value={this.state.userText} placeholder="Username" />
+                    <Input style={loginMargin} type="password" color="primary" onChange={this.passChange} value={this.state.passText} placeholder="Password" />
                     {/* <Button style={loginMargin} variant="contained" color="primary" onClick={this.login}>Login</Button> */}
-                    <Input type="submit" value="Login"/>
+                    <Input type="submit" value="Login" disableUnderline="true" style={submitButton} />
                 </form>
             </div>
         )
@@ -85,4 +85,14 @@ const loginMargin = {
     margin: "1em auto 1em auto",
     display: "block",
     textAlign: "center"
+}
+
+const submitButton = {
+    background: "#3F51B5",
+    color: "#FFFFFF",
+    padding: "3px",
+    borderRadius: "7px",
+    width: "100%",
+    marginLeft: "auto",
+    marginRight: "auto"
 }

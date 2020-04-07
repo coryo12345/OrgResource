@@ -3,6 +3,7 @@
 */
 
 const { orgDao } = require('../models/orgDao');
+const sql = require('../models/orgDaoSql');
 
 /** 
  *  GET /api/web/entity/info
@@ -11,8 +12,8 @@ const { orgDao } = require('../models/orgDao');
  */
 exports.info = function (req, res) {
     let entity = req.session.entity;
-    var dao = new orgDao(entity);
-    dao.entityInfo((val) => {
+    var dao = new orgDao();
+    dao.genericQueryExecute(sql.entityInfo, [entity], (val) => {
         try {
             var result = val.rows[0];
         }
@@ -32,8 +33,8 @@ exports.info = function (req, res) {
  */
 exports.pages = function (req, res) {
     let entity = req.session.entity;
-    var dao = new orgDao(entity);
-    dao.entityPages((val) => {
+    var dao = new orgDao();
+    dao.genericQueryExecute(sql.entityPages, [entity], (val) => {
         try {
             var result = val.rows;
         }
@@ -50,9 +51,8 @@ exports.pages = function (req, res) {
 exports.pageContent = function (req, res) {
     let entity = req.session.entity;
     let id = req.params.id;
-    console.log(id);
-    var dao = new orgDao(entity);
-    dao.pageContent(id, (val) => {
+    var dao = new orgDao();
+    dao.genericQueryExecute(sql.pageContent, [entity, id], (val) => {
         console.log(val);
         try {
             var result = val.rows;

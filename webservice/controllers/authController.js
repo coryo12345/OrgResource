@@ -3,6 +3,7 @@
 */
 
 const { orgDao } = require('../models/orgDao');
+const sql = require('../models/orgDaoSql');
 
 /** 
  *  POST /api/web/auth/login
@@ -15,9 +16,9 @@ exports.login = function (req, res) {
     let entity = req.body.entity;
     let username = req.body.username;
     let password = req.body.password;
-    var dao = new orgDao(entity);
-    dao.authenticate(username, password, (val) => {
-        if (val === true) {
+    var dao = new orgDao();
+    dao.genericQueryExecute(sql.authenticate, [entity, username, password], (val) => {
+        if (val.rowCount > 0) {
             req.session.entity = entity;
             req.session.loggedIn = true;
             res.json({ loggedIn: true, entity: entity });
@@ -25,7 +26,7 @@ exports.login = function (req, res) {
         else {
             res.json({ loggedIn: false });
         }
-    })
+    });
 }
 
 /** 
