@@ -10,11 +10,6 @@ const { orgDao } = require('../models/orgDao');
  *  Must be logged in
  */
 exports.info = function (req, res) {
-    if (req.session.loggedIn !== true || req.session.entity === null) {
-        res.status(403);
-        res.send();
-        return;
-    }
     let entity = req.session.entity;
     var dao = new orgDao(entity);
     dao.entityInfo((val) => {
@@ -36,11 +31,6 @@ exports.info = function (req, res) {
  *  Must be logged in
  */
 exports.pages = function (req, res) {
-    if (req.session.loggedIn !== true || req.session.entity === null) {
-        res.status(403);
-        res.send();
-        return;
-    }
     let entity = req.session.entity;
     var dao = new orgDao(entity);
     dao.entityPages((val) => {
@@ -58,11 +48,6 @@ exports.pages = function (req, res) {
 
 // GET /api/web/entity/page:id
 exports.pageContent = function (req, res) {
-    if (req.session.loggedIn !== true || req.session.entity === null) {
-        res.status(403);
-        res.send();
-        return;
-    }
     let entity = req.session.entity;
     let id = req.params.id;
     console.log(id);

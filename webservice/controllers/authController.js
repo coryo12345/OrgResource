@@ -50,6 +50,6 @@ exports.isLoggedIn = function (req, res) {
 exports.logout = function (req, res) {
     req.session.loggedIn = false;
     req.session.entity = null;
-    res.stats(200);
+    res.status(200);
     res.send();
 }

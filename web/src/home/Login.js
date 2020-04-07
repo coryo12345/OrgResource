@@ -12,7 +12,8 @@ export class Login extends Component {
         this.state = { domainText: '', userText: '', passText: '', failed: false, error: false }
     }
 
-    login() {
+    login(ev) {
+        ev.preventDefault()
         fetch('/api/web/auth/login', {
             method: 'post',
             headers: {
@@ -56,14 +57,17 @@ export class Login extends Component {
         const failed = (this.state.failed) ? <Alert style={loginMargin} severity="error">Login Failed</Alert> : <div></div>
         const error = (this.state.error) ? <Alert style={loginMargin} severity="warning">Can't Connect to Servers. Try again later.</Alert> : <div></div>
         return (
-            <form style={formStyle}>
-                <Input style={loginMargin} type="text" color="primary" onChange={this.domainChange} value={this.state.domainText} placeholder="Domain"></Input>
-                <Input style={loginMargin} type="text" color="primary" onChange={this.userChange} value={this.state.userText} placeholder="Username"></Input>
-                <Input style={loginMargin} type="password" color="primary" onChange={this.passChange} value={this.state.passText} placeholder="Password"></Input>
-                <Button style={loginMargin} variant="contained" color="primary" onClick={this.login}>Login</Button>
+            <div>
                 {failed}
                 {error}
-            </form>
+                <form style={formStyle} onSubmit={this.login}>
+                    <Input style={loginMargin} type="text" color="primary" onChange={this.domainChange} value={this.state.domainText} placeholder="Domain"></Input>
+                    <Input style={loginMargin} type="text" color="primary" onChange={this.userChange} value={this.state.userText} placeholder="Username"></Input>
+                    <Input style={loginMargin} type="password" color="primary" onChange={this.passChange} value={this.state.passText} placeholder="Password"></Input>
+                    {/* <Button style={loginMargin} variant="contained" color="primary" onClick={this.login}>Login</Button> */}
+                    <Input type="submit" value="Login"/>
+                </form>
+            </div>
         )
     }
 }
