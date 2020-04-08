@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { TopBar } from './TopBar'
-import { SideBar } from './SideBar'
+import { SideBar } from './SideBar/SideBar'
 import { Page } from './Page'
 
 export class Admin extends Component {
