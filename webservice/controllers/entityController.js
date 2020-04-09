@@ -27,6 +27,27 @@ exports.info = function (req, res) {
 }
 
 /**
+ *  GET /api/web/entity/modules
+ * 
+ *  Must be logged in
+ */
+exports.modules = function (req, res) {
+    let entity = req.session.entity;
+    var dao = new orgDao();
+    dao.genericQueryExecute(sql.entityModules, [entity], (val) => {
+        try {
+            var result = val.rows;
+        }
+        catch (err) {
+            res.status(500);
+            res.send();
+            return;
+        }
+        res.json(result);
+    });
+}
+
+/**
  *  GET /api/web/entity/pages
  * 
  *  Must be logged in
@@ -53,7 +74,6 @@ exports.pageContent = function (req, res) {
     let id = req.params.id;
     var dao = new orgDao();
     dao.genericQueryExecute(sql.pageContent, [entity, id], (val) => {
-        console.log(val);
         try {
             var result = val.rows;
         }

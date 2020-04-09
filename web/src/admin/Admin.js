@@ -32,12 +32,10 @@ export class Admin extends Component {
     }
 
     updatePage(pageId) {
-        console.log(pageId)
         this.setState({ pageContent: pageId })
     }
 
     render() {
-        console.log(this.state.pageContent);
         let innerComponent = <Page page={this.state.pageContent} />
         let gridShow = (this.state.menuShown === true) ? { gridTemplateColumns: '260px 1fr' } : { gridTemplateColumns: '0 1fr' }
         let sidebarShow = (this.state.menuShown === true) ? { display: 'block' } : { display: 'none' }

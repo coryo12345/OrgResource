@@ -19,7 +19,6 @@ export class Page extends Component {
     }
 
     update() {
-        console.log('update: ', this.props.page)
         if (this.props.page !== null) {
             fetch(`/api/web/entity/page/${this.props.page}`, { method: 'get' })
                 .then((resp) => {
@@ -30,13 +29,12 @@ export class Page extends Component {
                 .then((resp) => {
                     this.setState({ pageContent: resp })
                 })
-                .catch((err) => { console.log(err) })
+                .catch((err) => { console.error(err) })
             // ^^ Here could show connection error ^^
         }
     }
 
     render() {
-        console.log('page: ', this.props.page)
         return (
             <Box m={2}>
                 {this.state.pageContent && this.state.pageContent.map((val, i) => {

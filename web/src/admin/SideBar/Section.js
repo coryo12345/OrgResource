@@ -50,7 +50,7 @@ export class Section extends Component {
                 </Button>
                 <div style={Object.assign({}, childStyle, hiddenStyle)}>
                     {this.state.pages && this.state.pages.map((val, i) => {
-                        return <PageItem updatePage={this.props.updatePage} val={val}/>
+                        return <PageItem key={i} updatePage={this.props.updatePage} val={val}/>
                     })}
                 </div>
             </div>
@@ -71,7 +71,7 @@ const splitStyle = {
 const childStyle = {
     display: 'block',
     maxHeight: '0',
-    transition: 'max-height .2s ease-out',
+    transition: 'max-height .3s',
     overflow: 'hidden',
     paddingLeft: '1rem'
 }

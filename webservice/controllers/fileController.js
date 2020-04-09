@@ -23,7 +23,6 @@ exports.upload = function (req, res) {
         return;
     }
     let entity = req.session.entity;
-    console.log("file: ", req.file);
 
     tmp.dir(function _tempDirCreated(err, path, cleanupCallback) {
         if (err) throw err;

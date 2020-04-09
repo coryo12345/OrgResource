@@ -38,11 +38,27 @@ ORDER BY
 
 exports.pageContent = `
 SELECT
-        rbep.content
+        rbep.primary_content
 FROM
         orgdev.resources_by_entity_page rbep
 WHERE
         rbep.domain = $1
         AND page_id = $2
+;
+`;
+
+exports.entityModules = `
+SELECT
+        m.name,
+        em.display_name
+FROM
+        orgdev.entity_modules em,
+        orgdev.modules m
+WHERE
+        em.domain = $1
+        AND em.module_id = m.id
+        AND em.status = TRUE
+ORDER BY
+        em.id ASC
 ;
 `;

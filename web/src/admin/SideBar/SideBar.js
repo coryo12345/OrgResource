@@ -4,16 +4,35 @@ import { Section } from './Section'
 export class SideBar extends Component {
     constructor(props) {
         super(props)
+        this.state = { resources: null, users: null, settings: null }
     }
 
     componentDidMount() {
-        // get list of entity modules
+        fetch('/api/web/entity/modules', { method: 'get' })
+            .then((resp) => {
+                if (!resp.ok)
+                    throw Error('')
+                return resp.json()
+            })
+            .then((resp) => {
+                let st = {}
+                resp.forEach(module => {
+                    st[module.name] = { display: module.display_name }
+                });
+                this.setState(st)
+            })
+            .catch((err) => { console.error(err) })
     }
 
     render() {
+        var resources = this.state.resources ? <Section updatePage={this.props.updatePage} title={this.state.resources.display} endpoint="/api/web/entity/pages" settings={{ method: 'get' }} collapsedDefault={false} /> : <div></div>
+        var users = this.state.users ? <Section updatePage={this.props.updatePage} title={this.state.users.display} endpoint="/api/web/entity/pages" settings={{ method: 'get' }} collapsedDefault={true} /> : <div></div>
+        var settings = this.state.settings ? <Section updatePage={this.props.updatePage} title={this.state.settings.display} endpoint="/api/web/entity/pages" settings={{ method: 'get' }} collapsedDefault={true} /> : <div></div>
         return (
             <div style={Object.assign({}, outerStyle, this.props.style)}>
-                <Section updatePage={this.props.updatePage} title="Pages" endpoint="/api/web/entity/pages" settings={{method: 'get'}} collapsedDefault={false} />
+                {resources}
+                {users}
+                {settings}
             </div >
         )
     }

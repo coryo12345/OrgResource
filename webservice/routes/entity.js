@@ -10,6 +10,9 @@ var authMiddleware = require('../middleware/authMiddleware');
 // GET /api/web/entity/info
 router.get('/info', authMiddleware.validSession, entityController.info);
 
+// GET /api/web/entity/modules
+router.get('/modules', authMiddleware.validSession, entityController.modules);
+
 // GET /api/web/entity/pages
 router.get('/pages', authMiddleware.validSession, entityController.pages);
 
